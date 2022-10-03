@@ -1,0 +1,2 @@
+D:\Jaliya\projects\supportTicketSystem\TicketSystem\obj\Debug\TicketSystem.esproj.SuggestedBindingRedirects.cache
+D:\Jaliya\projects\supportTicketSystem\TicketSystem\obj\Debug\TicketSystem.esproj.CoreCompileInputs.cache
