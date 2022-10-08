@@ -14,6 +14,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { MatSelectModule } from '@angular/material/select';
 
@@ -24,12 +26,14 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
 import { LoginComponent } from './login/login.component';
 import { AllServicesService } from './all-services.service';
+import { CreateTicketComponent } from './create-ticket/create-ticket.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    CreateTicketComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +53,9 @@ import { AllServicesService } from './all-services.service';
     MatFormFieldModule,
     MatSelectModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatDialogModule,
+    MatTabsModule
   ],
   providers: [AllServicesService],
   bootstrap: [AppComponent]

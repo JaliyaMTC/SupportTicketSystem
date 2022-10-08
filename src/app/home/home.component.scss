@@ -1,0 +1,41 @@
+table {
+  width: 100%;
+  opacity: 80%;
+  border: 1px solid;
+}
+
+th {
+  font-weight: bolder;
+  text-align: center;
+  justify-content: center;
+  width: 100px;
+  overflow: hidden;
+  border: 1px solid;
+}
+
+/*th.mat-header-cell {
+  text-align: center;
+}*/
+
+td {
+  border: 1px solid;
+  color: black;
+  font-weight: bold;
+  width: 100px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.home-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-page-create-ticket {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 70px;
+  right: 70px;
+}

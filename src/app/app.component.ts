@@ -7,18 +7,18 @@ import { User, WeatherForecast } from './models/common';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
   public forecasts?: WeatherForecast[];
   public user?: User;
-  /*public userValidate?: User;*/
+  public userValidate?: User;
 
   constructor(http: HttpClient) {
-    http.get<WeatherForecast[]>('/weatherforecast').subscribe(result => {
-      this.forecasts = result;
-      console.log("result : ", result);
-    }, error => console.error(error));
+    //http.get<WeatherForecast[]>('/weatherforecast').subscribe(result => {
+    //  this.forecasts = result;
+    //  console.log("result : ", result);
+    //}, error => console.error(error));
     http.get<User>('/user/2').subscribe(user => {
       this.user = user;
       console.log("user :", user);

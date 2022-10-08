@@ -27,3 +27,8 @@ export interface UserLevel {
   userLevelId: string;
   userLevelType: string;
 }
+
+export interface CreateTicketData {
+  title: string | undefined;
+  description: string | undefined;
+}

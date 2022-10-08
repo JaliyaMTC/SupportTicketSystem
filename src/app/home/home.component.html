@@ -1,43 +1,182 @@
-<div class="home-page" style="width: 80%">
-  <table summary="Open task List" matSort mat-table [dataSource]="ticketsList"
-         class="mat-elevation-z8">
-    <ng-container matColumnDef="ticketId">
-      <th id="ticketId" mat-header-cell *matHeaderCellDef>Ticket Id</th>
-      <td mat-cell *matCellDef="let element">
-        <span matTooltip="{{element.ticketId}}"
-              matTooltipPosition="left">{{element.ticketId}}</span>
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="title">
-      <th id="title" mat-header-cell *matHeaderCellDef>Title</th>
-      <td mat-cell *matCellDef="let element">
-        <span matTooltip="{{element.title}}"
-              matTooltipPosition="left">{{element.title}}</span>
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="description">
-      <th id="description" mat-header-cell *matHeaderCellDef>Description</th>
-      <td mat-cell *matCellDef="let element">
-        <span matTooltip="{{element.description}}"
-              matTooltipPosition="left">{{element.description}}</span>
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="action">
-      <th id="action" mat-header-cell *matHeaderCellDef>Action</th>
-      <td mat-cell *matCellDef="let element">
-        <!--<button class="btn btn-primary orange-btn action-btn mr-3"
-                (click)="updateDeletionStatus(element.id,'APPROVED')"
-                [disabled]="isButtonClick">
-          APPROVE
-        </button>
-        <button class="btn btn-primary red-btn action-btn"
-                (click)="updateDeletionStatus(element.id,'REJECTED')"
-                [disabled]="isButtonClick">
-          DECLINE
-        </button>-->
-      </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-</div>
+<div class="home-page">
+  <div style="width: 10%">
+  </div>
+  <div style="width: 80%">
+    <mat-tab-group (selectedTabChange)="onTabChanged($event)">
+      <mat-tab label="Open">
+        <table summary="Open task List" matSort mat-table [dataSource]="ticketsList"
+               class="mat-elevation-z8">
+          <ng-container matColumnDef="ticketId">
+            <th id="ticketId" mat-header-cell *matHeaderCellDef>Ticket Id</th>
+            <td mat-cell *matCellDef="let element">
+              <span matTooltip="{{element.ticketId}}"
+                    matTooltipPosition="left">{{element.ticketId}}</span>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="title">
+            <th id="title" mat-header-cell *matHeaderCellDef>Title</th>
+            <td mat-cell *matCellDef="let element">
+              <span matTooltip="{{element.title}}"
+                    matTooltipPosition="left">{{element.title}}</span>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="description">
+            <th id="description" mat-header-cell *matHeaderCellDef>Description</th>
+            <td mat-cell *matCellDef="let element">
+              <span matTooltip="{{element.description}}"
+                    matTooltipPosition="left">{{element.description}}</span>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="action">
+            <th id="action" mat-header-cell *matHeaderCellDef>Action</th>
+            <td mat-cell *matCellDef="let element">
+              <!--<button class="btn btn-primary orange-btn action-btn mr-3"
+                      (click)="updateDeletionStatus(element.id,'APPROVED')"
+                      [disabled]="isButtonClick">
+                APPROVE
+              </button>
+              <button class="btn btn-primary red-btn action-btn"
+                      (click)="updateDeletionStatus(element.id,'REJECTED')"
+                      [disabled]="isButtonClick">
+                DECLINE
+              </button>-->
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </mat-tab>
+      <mat-tab label="In Progress">
+        <table summary="In Progress task List" matSort mat-table [dataSource]="ticketsList"
+               class="mat-elevation-z8">
+          <ng-container matColumnDef="ticketId">
+            <th id="ticketId" mat-header-cell *matHeaderCellDef>Ticket Id</th>
+            <td mat-cell *matCellDef="let element">
+              <span matTooltip="{{element.ticketId}}"
+                    matTooltipPosition="left">{{element.ticketId}}</span>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="title">
+            <th id="title" mat-header-cell *matHeaderCellDef>Title</th>
+            <td mat-cell *matCellDef="let element">
+              <span matTooltip="{{element.title}}"
+                    matTooltipPosition="left">{{element.title}}</span>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="description">
+            <th id="description" mat-header-cell *matHeaderCellDef>Description</th>
+            <td mat-cell *matCellDef="let element">
+              <span matTooltip="{{element.description}}"
+                    matTooltipPosition="left">{{element.description}}</span>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="action">
+            <th id="action" mat-header-cell *matHeaderCellDef>Action</th>
+            <td mat-cell *matCellDef="let element">
+              <!--<button class="btn btn-primary orange-btn action-btn mr-3"
+                      (click)="updateDeletionStatus(element.id,'APPROVED')"
+                      [disabled]="isButtonClick">
+                APPROVE
+              </button>
+              <button class="btn btn-primary red-btn action-btn"
+                      (click)="updateDeletionStatus(element.id,'REJECTED')"
+                      [disabled]="isButtonClick">
+                DECLINE
+              </button>-->
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </mat-tab>
+      <mat-tab label="Closed">
+        <table summary="Closed task List" matSort mat-table [dataSource]="ticketsList"
+               class="mat-elevation-z8">
+          <ng-container matColumnDef="ticketId">
+            <th id="ticketId" mat-header-cell *matHeaderCellDef>Ticket Id</th>
+            <td mat-cell *matCellDef="let element">
+              <span matTooltip="{{element.ticketId}}"
+                    matTooltipPosition="left">{{element.ticketId}}</span>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="title">
+            <th id="title" mat-header-cell *matHeaderCellDef>Title</th>
+            <td mat-cell *matCellDef="let element">
+              <span matTooltip="{{element.title}}"
+                    matTooltipPosition="left">{{element.title}}</span>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="description">
+            <th id="description" mat-header-cell *matHeaderCellDef>Description</th>
+            <td mat-cell *matCellDef="let element">
+              <span matTooltip="{{element.description}}"
+                    matTooltipPosition="left">{{element.description}}</span>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="action">
+            <th id="action" mat-header-cell *matHeaderCellDef>Action</th>
+            <td mat-cell *matCellDef="let element">
+              <!--<button class="btn btn-primary orange-btn action-btn mr-3"
+                      (click)="updateDeletionStatus(element.id,'APPROVED')"
+                      [disabled]="isButtonClick">
+                APPROVE
+              </button>
+              <button class="btn btn-primary red-btn action-btn"
+                      (click)="updateDeletionStatus(element.id,'REJECTED')"
+                      [disabled]="isButtonClick">
+                DECLINE
+              </button>-->
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </mat-tab>
+      <mat-tab label="Reopened">
+        <table summary="Open task List" matSort mat-table [dataSource]="ticketsList"
+               class="mat-elevation-z8">
+          <ng-container matColumnDef="ticketId">
+            <th id="ticketId" mat-header-cell *matHeaderCellDef>Ticket Id</th>
+            <td mat-cell *matCellDef="let element">
+              <span matTooltip="{{element.ticketId}}"
+                    matTooltipPosition="left">{{element.ticketId}}</span>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="title">
+            <th id="title" mat-header-cell *matHeaderCellDef>Title</th>
+            <td mat-cell *matCellDef="let element">
+              <span matTooltip="{{element.title}}"
+                    matTooltipPosition="left">{{element.title}}</span>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="description">
+            <th id="description" mat-header-cell *matHeaderCellDef>Description</th>
+            <td mat-cell *matCellDef="let element">
+              <span matTooltip="{{element.description}}"
+                    matTooltipPosition="left">{{element.description}}</span>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="action">
+            <th id="action" mat-header-cell *matHeaderCellDef>Action</th>
+            <td mat-cell *matCellDef="let element">
+              <!--<button class="btn btn-primary orange-btn action-btn mr-3"
+                      (click)="updateDeletionStatus(element.id,'APPROVED')"
+                      [disabled]="isButtonClick">
+                APPROVE
+              </button>
+              <button class="btn btn-primary red-btn action-btn"
+                      (click)="updateDeletionStatus(element.id,'REJECTED')"
+                      [disabled]="isButtonClick">
+                DECLINE
+              </button>-->
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+  <div class="home-page-create-ticket-button" style="width: 10%">
+    <button mat-raised-button (click)="openCreateTicket()">Create Ticket</button>
+  </div>

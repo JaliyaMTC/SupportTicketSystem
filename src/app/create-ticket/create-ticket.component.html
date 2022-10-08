@@ -1,0 +1,25 @@
+<div class="main">
+  <div>
+    <h3 class="projectTitle">Create Ticket</h3>
+  </div>
+  <div style=" text-align: center; ">
+    <form #submitForm="ngForm" (ngSubmit)="createTicket()">
+      <mat-error *ngIf="!formValid">
+        Either title or description is empty.
+      </mat-error>
+      <mat-form-field>
+        <input matInput placeholder="Title" [(ngModel)]="title" name="title" required>
+        <mat-error>
+          Please provide a title for the ticket
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Description" [(ngModel)]="description" name="description" required>
+        <mat-error>
+          Please provide a description
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" [disabled]="!submitForm.form.valid">Submit</button>
+    </form>
+  </div>
+</div>

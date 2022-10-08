@@ -6,7 +6,7 @@ import { User } from './../models/common';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
   constructor(private router: Router,
@@ -15,15 +15,20 @@ export class LoginComponent implements OnInit {
   public username = '';
   public password = '';
   public userValidate?: User;
+  public user?: User;
 
   ngOnInit(): void {
   }
   loginToSystem() {
     console.log("Username: ", this.username);
     console.log("Password: ", this.password);
-    this.http.get<User>('/userValidate/ChanakaJaliya').subscribe(e => {
-      this.userValidate = e;
-      console.log("userValidate :", e);
+    this.http.get<User>('/user/2').subscribe(user => {
+      this.user = user;
+      console.log("user :", user);
+    }, error => console.error(error));
+    this.http.get<User>('/userValidate/ChanakaJaliya').subscribe(res => {
+      this.userValidate = res;
+      console.log("userValidate :", res);
     }, error => console.error(error));
     this.router.navigate(['/home']);
   }
