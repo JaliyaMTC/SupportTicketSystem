@@ -15,7 +15,8 @@ mat-form-field {
 }
 
 .main {
-  /*display: flex;
-  justify-content: center;
-  align-items: center;*/
+  /*display: flex;*/
+  /*justify-content: center;*/
+  /*align-items: center;*/
+  /*display: inline-block;*/
 }

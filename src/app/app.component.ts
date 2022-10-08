@@ -12,16 +12,21 @@ import { User, WeatherForecast } from './models/common';
 export class AppComponent implements OnInit {
   public forecasts?: WeatherForecast[];
   public user?: User;
+  /*public userValidate?: User;*/
 
   constructor(http: HttpClient) {
     http.get<WeatherForecast[]>('/weatherforecast').subscribe(result => {
       this.forecasts = result;
       console.log("result : ", result);
     }, error => console.error(error));
-    http.get<User>('/user/2').subscribe(e => {
-      this.user = e;
-      console.log("user :", e);
+    http.get<User>('/user/2').subscribe(user => {
+      this.user = user;
+      console.log("user :", user);
     }, error => console.error(error));
+    //http.get<User>('/userValidate/ChanakaJaliya').subscribe(e => {
+    //  this.userValidate = e;
+    //  console.log("userValidate :", e);
+    //}, error => console.error(error));
   }
 
   title = 'TicketSystem';
