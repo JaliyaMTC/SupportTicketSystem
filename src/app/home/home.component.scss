@@ -7,19 +7,19 @@ table {
 th {
   font-weight: bolder;
   text-align: center;
-  justify-content: center;
   width: 100px;
   overflow: hidden;
-  border: 1px solid;
+  /*  border: 1px solid;
+*/
 }
 
-/*th.mat-header-cell {
-  text-align: center;
-}*/
+  th.mat-header-cell {
+    text-align: center;
+  }
 
 td {
-  border: 1px solid;
-  color: black;
+  /*border: 1px solid;*/
+  /*color: black;*/
   font-weight: bold;
   width: 100px;
   overflow: hidden;

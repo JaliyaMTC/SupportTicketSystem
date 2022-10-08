@@ -23,6 +23,11 @@ export interface User {
   userLevelId: string;
 }
 
+export interface UserLoginResp {
+  userId: string;
+  userLevel: string;
+}
+
 export interface UserLevel {
   userLevelId: string;
   userLevelType: string;

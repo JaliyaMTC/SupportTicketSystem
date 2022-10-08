@@ -17,7 +17,7 @@ export class CreateTicketComponent implements OnInit {
   public formValid = true;
   title = '';
   description = '';
-  userId = '';
+  userId = '2';
 
   constructor(public dialogRef: MatDialogRef<CreateTicketComponent>,
     private http: HttpClient) { }
@@ -27,7 +27,7 @@ export class CreateTicketComponent implements OnInit {
 
   createTicket() {
     console.log(this.description)
-    this.http.post<any>('/create-ticket', {
+    this.http.post<any>('https://localhost:7239/create-ticket', {
       "title": this.title,
       "description": this.description,
       "userId": this.userId

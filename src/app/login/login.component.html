@@ -13,13 +13,15 @@
             Please provide a valid user name
           </mat-error>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="password_field">
           <input matInput type="password" placeholder="Password" [(ngModel)]="password" name="password" required>
           <mat-error>
             Please provide a valid password
           </mat-error>
         </mat-form-field>
-        <button mat-raised-button color="primary" [disabled]="!loginForm.form.valid">Login</button>
+        <label *ngIf="isLogInValid">Invalid User name and Password, Please try again !</label>
+        <br />
+        <button class="login-btn" mat-raised-button color="primary" [disabled]="!loginForm.form.valid">Login</button>
       </form>
     </mat-card-content>
   </mat-card>
