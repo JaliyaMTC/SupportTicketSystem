@@ -3,13 +3,23 @@
     <h3 class="projectTitle">Add Assignee</h3>
   </div>
   <div>
-    <label>Assignee for ticket</label>
+    <!--<label>Assignee for ticket</label>
     <ng-select [items]="assigneeList"
-               bindLabel="name"
-               bindValue="userId"
-               [(ngModel)]="assignee">
-    </ng-select>
+                bindLabel="name"
+                bindValue="userId"
+                [(ngModel)]="assignee">
+    </ng-select>-->
+    <mat-form-field appearance="fill">
+      <mat-label>Assignee for ticket</mat-label>
+      <mat-select [(ngModel)]="assignee">
+        <mat-option *ngFor="let assigneeInfo of assigneeList" [value]="assigneeInfo.userId">
+          {{assigneeInfo.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
     <br />
+    <!--"-->
     <button mat-raised-button color="primary" [disabled]="assignee == null || assignee == undefined"
             (click)="assignToTicket()" style="float: right;">
       Assign

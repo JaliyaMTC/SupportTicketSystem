@@ -41,10 +41,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.userId = localStorage.getItem("userId");
-      this.userLevel = localStorage.getItem("userLevel");
+      this.userId = sessionStorage.getItem("userId");
+      this.userLevel = sessionStorage.getItem("userLevel");
       console.log("yyuyu:" + this.userId)
-      this.loadTableData();
+      if (this.userId == null || this.userLevel == null) {
+        this.router.navigate(['']);
+      } else {
+        this.loadTableData();
+      }
     });
   }
 
@@ -61,6 +65,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
     this.http.get<any>('https://localhost:7239/ticketBy/' + createdBy + '/status/' + this.status).subscribe(res => {
       this.ticketsList = res;
+      this.dataSource.data = this.ticketsList;
+      this.dataSource.paginator = this.paginator;
 
       console.log("ticket list :", res);
     }, error => console.error(error));
@@ -82,8 +88,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   openCreateTicket(): void {
-    this.userId = localStorage.getItem("userId");
-    this.userLevel = localStorage.getItem("userLevel");
+    this.userId = sessionStorage.getItem("userId");
+    this.userLevel = sessionStorage.getItem("userLevel");
     const dialogRef = this.dialog.open(CreateTicketComponent, {
       width: '450px',
       data: { title: this.title, description: this.description, userId: this.userId },
@@ -110,9 +116,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   logoutFromSystem() {
-    localStorage.removeItem('userId');
-    localStorage.removeItem('userLevel');
-    localStorage.clear();
+    sessionStorage.removeItem('userId');
+    sessionStorage.removeItem('userLevel');
+    sessionStorage.clear();
+    this.router.navigate(['']);
   }
 
   addAssigneeToTicket(ticketId: any) {

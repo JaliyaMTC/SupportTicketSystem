@@ -1,16 +1,18 @@
 <div class="home-page">
   <div class="topnav" style="width: 100%">
+
     <button (click)="openCreateTicket()" *ngIf="userLevel == 'CUSTOMER'" class="create-ticket-button">
       Create Ticket
     </button>
-    <a href="" class="logoutBtn" onclick="logoutFromSystem()" style="float: right;">Log Out</a>
+    <span  class="topnav-title" style=" text-align: center; ">Support Ticket System</span>
+    <button class="logoutBtn" (click)="logoutFromSystem()">Log Out</button>
   </div>
   <br />
   <div style="width: 100%; margin-top: 60px; margin-left: 20px; margin-right: 20px;">
     <div>
       <mat-tab-group (selectedTabChange)="onTabChanged($event)">
         <mat-tab label="Open">
-          <table summary="Open task List" matSort mat-table [dataSource]="ticketsList"
+          <table summary="Open task List" matSort mat-table [dataSource]="dataSource"
                  class="mat-elevation-z8">
             <ng-container matColumnDef="ticketId">
               <th id="ticketId" mat-header-cell *matHeaderCellDef>Ticket Id</th>
@@ -54,12 +56,14 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
           <mat-paginator #paginator
+                         [length]="ticketsList.length"
+                         [pageSize]="10"
                          [pageSizeOptions]="[10, 15, 20]"
                          showFirstLastButtons>
           </mat-paginator>
         </mat-tab>
         <mat-tab label="In Progress">
-          <table summary="In Progress task List" matSort mat-table [dataSource]="ticketsList"
+          <table summary="In Progress task List" matSort mat-table [dataSource]="dataSource"
                  class="mat-elevation-z8">
             <ng-container matColumnDef="ticketId">
               <th id="ticketId" mat-header-cell *matHeaderCellDef>Ticket Id</th>
@@ -97,12 +101,14 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
           <mat-paginator #paginator
+                         [length]="ticketsList.length"
+                         [pageSize]="10"
                          [pageSizeOptions]="[10, 15, 20]"
                          showFirstLastButtons>
           </mat-paginator>
         </mat-tab>
         <mat-tab label="Closed">
-          <table summary="Closed task List" matSort mat-table [dataSource]="ticketsList"
+          <table summary="Closed task List" matSort mat-table [dataSource]="dataSource"
                  class="mat-elevation-z8">
             <ng-container matColumnDef="ticketId">
               <th id="ticketId" mat-header-cell *matHeaderCellDef>Ticket Id</th>
@@ -139,12 +145,14 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
           <mat-paginator #paginator
+                         [length]="ticketsList.length"
+                         [pageSize]="10"
                          [pageSizeOptions]="[10, 15, 20]"
                          showFirstLastButtons>
           </mat-paginator>
         </mat-tab>
         <mat-tab label="Reopened">
-          <table summary="Open task List" matSort mat-table [dataSource]="ticketsList"
+          <table summary="Open task List" matSort mat-table [dataSource]="dataSource"
                  class="mat-elevation-z8">
             <ng-container matColumnDef="ticketId">
               <th id="ticketId" mat-header-cell *matHeaderCellDef>Ticket Id</th>
@@ -188,6 +196,8 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
           <mat-paginator #paginator
+                         [length]="ticketsList.length"
+                         [pageSize]="10"
                          [pageSizeOptions]="[10, 15, 20]"
                          showFirstLastButtons>
           </mat-paginator>
