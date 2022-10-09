@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, OnInit, Inject, AfterViewInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CreateTicketComponent } from './../create-ticket/create-ticket.component';
@@ -12,9 +12,9 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
   styleUrls: ['./home.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class HomeComponent implements OnInit {
-  @ViewChild(MatPaginator, { static: true })
-  paginator!: MatPaginator;
+export class HomeComponent implements OnInit, AfterViewInit {
+  @ViewChild('paginator') paginator!: MatPaginator;
+  @ViewChild('paginatorPageSize') paginatorPageSize!: MatPaginator;
 
   displayedColumns = ['ticketId', 'title', 'description', 'action'];
   dataSource = new MatTableDataSource<Element[]>;
@@ -28,15 +28,25 @@ export class HomeComponent implements OnInit {
 
   title = "";
   description = "";
-  userId = 2;
+  userId: any;
+  userLevel: any;
   status = 'Open';
+  isButtonClick = false;
 
   constructor(public dialog: MatDialog,
     private http: HttpClient) { }
 
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.userId = localStorage.getItem("userId");
+      this.userLevel = localStorage.getItem("userLevel");
+      console.log("yyuyu:" + this.userId)
+      this.loadTableData();
+    });
+  }
+
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
-    this.loadTableData();
   }
 
   loadTableData() {
@@ -57,12 +67,13 @@ export class HomeComponent implements OnInit {
     } else if (this.selectedTabIndex == 2) {
       this.status = 'Closed';
     } else if (this.selectedTabIndex == 3) {
-      this.status = 'Reopen';
+      this.status = 'ReOpen';
     }
     this.loadTableData();
   }
 
   openCreateTicket(): void {
+    this.userId = localStorage.getItem("userId");
     const dialogRef = this.dialog.open(CreateTicketComponent, {
       width: '450px',
       data: { title: this.title, description: this.description, userId: this.userId },
@@ -73,5 +84,18 @@ export class HomeComponent implements OnInit {
       this.title = result;
       this.loadTableData();
     });
+  }
+
+  changeStatus(ticketId: any, status: any) {
+    this.isButtonClick = true;
+    this.http.post<any>('https://localhost:7239/update-ticket', {
+      "userId": this.userId,
+      "ticketId": ticketId,
+      "status": status
+    }).subscribe(r => {
+      this.isButtonClick = false;
+      this.loadTableData();
+      console.log("successfully updated the ticket");
+    }, error => { console.error(error); this.isButtonClick = false; });
   }
 }

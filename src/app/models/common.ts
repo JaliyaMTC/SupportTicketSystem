@@ -13,6 +13,7 @@ export interface Tickets {
   modifiedTime: string;
   status: string;
   title: string;
+  assignee: string;
 }
 
 export interface User {
@@ -36,4 +37,5 @@ export interface UserLevel {
 export interface CreateTicketData {
   title: string | undefined;
   description: string | undefined;
+  userId: string | undefined;
 }

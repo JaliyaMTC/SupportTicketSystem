@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CreateTicketData } from '../models/common';
 
 export interface CrateTicketData {
   title: string;
@@ -17,16 +18,19 @@ export class CreateTicketComponent implements OnInit {
   public formValid = true;
   title = '';
   description = '';
-  userId = '2';
+  userId: any;
 
   constructor(public dialogRef: MatDialogRef<CreateTicketComponent>,
-    private http: HttpClient) { }
+    private http: HttpClient,
+    @Inject(MAT_DIALOG_DATA) public data: CreateTicketData) { }
 
   ngOnInit(): void {
+    this.userId = this.data.userId;
   }
 
   createTicket() {
     console.log(this.description)
+    console.log("userId : ", this.userId);
     this.http.post<any>('https://localhost:7239/create-ticket', {
       "title": this.title,
       "description": this.description,

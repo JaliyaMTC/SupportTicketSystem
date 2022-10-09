@@ -39,3 +39,14 @@ td {
   bottom: 70px;
   right: 70px;
 }
+
+.create-ticket-icon {
+  z-index: 1;
+  position: fixed;
+  bottom: 2vh;
+  right: 2vh;
+}
+
+.mat-toolbar-background {
+  background: transparent;
+}

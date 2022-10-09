@@ -27,13 +27,11 @@ export class LoginComponent implements OnInit {
     //console.log("Password: ", this.password);
     var secretKey = 'secret';
     var encodedPassword = CryptoJS.AES.encrypt(this.password.trim(), secretKey).toString();
-    this.http.get<User>('https://localhost:7239/user/1').subscribe(user => {
-      this.user = user;
-      console.log("user :", user);
-    }, error => console.error(error));
     this.http.get<UserLoginResp>('https://localhost:7239/userValidate/' + this.username + '/password/' + this.password).subscribe(res => {
       this.userValidate = res;
       if (!!this.userValidate.userId && !!this.userValidate.userLevel) {
+        localStorage.setItem("userId", this.userValidate.userId);
+        localStorage.setItem("userLevel", this.userValidate.userLevel);
         this.router.navigate(['/home']);
       } else {
         this.isLogInValid = true;
