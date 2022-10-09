@@ -1,26 +1,15 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  public forecasts?: WeatherForecast[];
+export class AppComponent implements OnInit {
+  constructor(http: HttpClient) { }
 
-  constructor(http: HttpClient) {
-    http.get<WeatherForecast[]>('/weatherforecast').subscribe(result => {
-      this.forecasts = result;
-    }, error => console.error(error));
+  ngOnInit() {
   }
-
-  title = 'TicketSystem';
-}
-
-interface WeatherForecast {
-  date: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
 }
