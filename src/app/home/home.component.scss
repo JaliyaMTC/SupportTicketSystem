@@ -1,29 +1,39 @@
 table {
   width: 100%;
   opacity: 80%;
-  border: 1px solid;
+  table-layout: auto;
 }
 
-th {
-  font-weight: bolder;
-  text-align: center;
-  width: 100px;
-  overflow: hidden;
-  /*  border: 1px solid;
-*/
+th .mat-header-cell {
+  text-align: center !important;
 }
 
-  th.mat-header-cell {
-    text-align: center;
-  }
-
-td {
-  /*border: 1px solid;*/
-  /*color: black;*/
+td, th {
   font-weight: bold;
-  width: 100px;
   overflow: hidden;
   text-align: center;
+}
+
+#action {
+  width: 25%;
+}
+
+#ticketId {
+  width: 25%;
+}
+
+#title {
+  width: 20%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#descrition {
+  width: 30%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .home-page {
@@ -49,4 +59,41 @@ td {
 
 .mat-toolbar-background {
   background: transparent;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  z-index: 4;
+  top: 0;
+}
+
+  .topnav a {
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+
+    .topnav a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+
+    .topnav a.active {
+      background-color: #04AA6D;
+      color: white;
+    }
+
+.create-ticket-button {
+  float: left;
+  background-color: #333;
+  font: 400 18px/47px Roboto, "Helvetica Neue", sans-serif;
+  color: white;
+  border: none;
+  box-shadow: none;
+  text-align: center;
+  cursor: pointer;
 }

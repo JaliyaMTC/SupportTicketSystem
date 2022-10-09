@@ -1,0 +1,18 @@
+<div class="main">
+  <div>
+    <h3 class="projectTitle">Add Assignee</h3>
+  </div>
+  <div>
+    <label>Assignee for ticket</label>
+    <ng-select [items]="assigneeList"
+               bindLabel="name"
+               bindValue="userId"
+               [(ngModel)]="assignee">
+    </ng-select>
+    <br />
+    <button mat-raised-button color="primary" [disabled]="assignee == null || assignee == undefined"
+            (click)="assignToTicket()" style="float: right;">
+      Assign
+    </button>
+  </div>
+</div>

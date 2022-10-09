@@ -28,13 +28,16 @@ import { AppRoutingModule } from './app.routing';
 import { LoginComponent } from './login/login.component';
 import { AllServicesService } from './all-services.service';
 import { CreateTicketComponent } from './create-ticket/create-ticket.component';
+import { AssigneeSelectionComponent } from './assignee-selection/assignee-selection.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    CreateTicketComponent
+    CreateTicketComponent,
+    AssigneeSelectionComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,8 @@ import { CreateTicketComponent } from './create-ticket/create-ticket.component';
     AppRoutingModule,
     MatDialogModule,
     MatTabsModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    NgSelectModule
   ],
   providers: [AllServicesService],
   bootstrap: [AppComponent]

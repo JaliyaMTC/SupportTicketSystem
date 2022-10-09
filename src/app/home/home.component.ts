@@ -5,6 +5,8 @@ import { CreateTicketComponent } from './../create-ticket/create-ticket.componen
 import { NgModule } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { Router } from '@angular/router';
+import { AssigneeSelectionComponent } from '../assignee-selection/assignee-selection.component';
 
 @Component({
   selector: 'app-home',
@@ -34,7 +36,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   isButtonClick = false;
 
   constructor(public dialog: MatDialog,
-    private http: HttpClient) { }
+    private http: HttpClient,
+    private router: Router,) { }
 
   ngAfterViewInit() {
     setTimeout(() => {
@@ -50,7 +53,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   loadTableData() {
-    this.http.get<any>('https://localhost:7239/ticketBy/' + this.userId + '/status/' + this.status).subscribe(res => {
+    var createdBy;
+    if (this.userLevel == 'CUSTOMER') {
+      createdBy = this.userId;
+    } else {
+      createdBy = null;
+    }
+    this.http.get<any>('https://localhost:7239/ticketBy/' + createdBy + '/status/' + this.status).subscribe(res => {
       this.ticketsList = res;
 
       console.log("ticket list :", res);
@@ -74,6 +83,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   openCreateTicket(): void {
     this.userId = localStorage.getItem("userId");
+    this.userLevel = localStorage.getItem("userLevel");
     const dialogRef = this.dialog.open(CreateTicketComponent, {
       width: '450px',
       data: { title: this.title, description: this.description, userId: this.userId },
@@ -97,5 +107,24 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.loadTableData();
       console.log("successfully updated the ticket");
     }, error => { console.error(error); this.isButtonClick = false; });
+  }
+
+  logoutFromSystem() {
+    localStorage.removeItem('userId');
+    localStorage.removeItem('userLevel');
+    localStorage.clear();
+  }
+
+  addAssigneeToTicket(ticketId: any) {
+    const dialogRef = this.dialog.open(AssigneeSelectionComponent, {
+      width: '450px',
+      data: { ticketId: ticketId, userId: this.userId },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed' + result);
+      this.title = result;
+      this.loadTableData();
+    });
   }
 }
